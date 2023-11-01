@@ -6,12 +6,12 @@
       <input
         :value="password"
         readonly
-        class="text-whitish bg-inherit text-2xl outline-none md:text-3xl"
+        class="text-whitish w-[90%] bg-inherit text-2xl outline-none md:text-3xl"
       />
       <img :src="copyIcon" alt="copy password" @click="copyPassword" />
       <p
         v-if="copiedClicked"
-        class="text-green text-sm absolute bottom-1 right-3"
+        class="text-green text-xs absolute bottom-[2px] right-0 md:text-sm md:bottom-1 md:right-3"
       >
         Copied!
       </p>

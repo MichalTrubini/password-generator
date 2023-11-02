@@ -41,7 +41,7 @@
           @emittedInputValue="emittedInputValue"
         />
       </div>
-      <TheStrengthValuator />
+      <TheStrengthValuator :strength="strength"/>
       <button class="w-full p-4 bg-green uppercase text-darkGray text-base hover:cursor-pointer hover:bg-inherit hover:outline-green hover:outline-2p hover:outline hover:text-green">
         <p class="inline">generate</p>
         <img :src="arrowIcon" alt="generate" class="inline pl-4" />
@@ -57,6 +57,7 @@ import TheSlider from "./TheSlider.vue";
 import TheStrengthValuator from "./TheStrengthValuator.vue";
 import InputElement from "./InputElement.vue";
 import generatePassword from "../functions/generatePassword";
+import zxcvbn from 'zxcvbn';
 
 export default {
   name: "Form",
@@ -65,7 +66,8 @@ export default {
     return {
       password: "",
       copiedClicked: false,
-      sliderValue: 10,
+      sliderValue: 0,
+      strength: '',
       checkedInputs: {
         uppercase: false,
         lowercase: false,
@@ -78,8 +80,8 @@ export default {
   },
   methods: {
     submitForm() {
-      console.log(generatePassword(this.sliderValue, this.checkedInputs));
       this.password = generatePassword(this.sliderValue, this.checkedInputs);
+      this.evaluatePasswordStrength(this.password);
     },
     emittedSliderValue(value) {
       this.sliderValue = value;
@@ -93,6 +95,12 @@ export default {
       setTimeout(() => {
         this.copiedClicked = false;
       }, 1500);
+    },
+    evaluatePasswordStrength(password) {
+      const result = zxcvbn(password);
+      const score = result.score;
+      this.strength = (score === 0 || score === 1) ? 'too weak' : score === 2 ? 'weak' : score === 3 ? 'medium' : 'strong';
+      console.log(result.score);
     },
   },
 };

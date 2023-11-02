@@ -1,12 +1,12 @@
 <template>
   <div class="flex flex-row-reverse justify-end items-center gap-5">
-    <label class="textGroup" :for="id">{{ label }}</label>
+    <label class="textGroup hover:cursor-pointer" :for="id">{{ label }}</label>
     <input
       type="checkbox"
       :id="id"
       v-model="isChecked"
       @change="handleInputChange"
-      class="appearance-none border-2 border-whitish w-4 h-4 checked:bg-green checked:border-none customTick"
+      class="appearance-none border-2 border-whitish w-4 h-4 checked:bg-green checked:border-none customTick hover:cursor-pointer hover:border-green"
     />
   </div>
 </template>

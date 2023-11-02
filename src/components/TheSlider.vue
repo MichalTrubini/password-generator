@@ -4,7 +4,7 @@
     <p class="text-green text-2xl md:text-3xl">{{ sliderValue }}</p>
   </div>
   <div class="mb-10 mt-6 md:mt-9">
-    <Slider v-model="sliderValue" class="w-14rem" :min="1" :max="20" @change="emitValue"/>
+    <Slider v-model="sliderValue" class="w-14rem hover:cursor-pointer" :min="0" :max="20" @change="emitValue"/>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      sliderValue: 10,
+      sliderValue: 0,
     };
   },
   emits: ['emittedSliderValue'],
@@ -39,6 +39,12 @@ export default {
 :deep(.p-slider .p-slider-handle) {
     background-color: #fff;
     border: 2px solid #fff;
+}
+
+:deep(.p-slider .p-slider-handle:hover) {
+    background-color: inherit;
+    border: 2px solid #A4FFAF;
+    cursor: pointer;
 }
 
 </style>

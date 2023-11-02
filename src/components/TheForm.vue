@@ -5,10 +5,11 @@
     >
       <input
         :value="password"
+        placeholder="PTx1f5DaFX"
         readonly
-        class="text-whitish w-[90%] bg-inherit text-2xl outline-none md:text-3xl"
+        class="text-whitish w-[90%] outputInput bg-inherit text-2xl outline-none md:text-3xl"
       />
-      <img :src="copyIcon" alt="copy password" @click="copyPassword" />
+      <img :src="copyIcon" alt="copy password" @click="copyPassword" class="hover:cursor-pointer copyIcon"/>
       <p
         v-if="copiedClicked"
         class="text-green text-xs absolute bottom-[2px] right-0 md:text-sm md:bottom-1 md:right-3"
@@ -41,7 +42,7 @@
         />
       </div>
       <TheStrengthValuator />
-      <button class="w-full p-4 bg-green uppercase text-darkGray text-base">
+      <button class="w-full p-4 bg-green uppercase text-darkGray text-base hover:cursor-pointer hover:bg-inherit hover:outline-green hover:outline-2p hover:outline hover:text-green">
         <p class="inline">generate</p>
         <img :src="arrowIcon" alt="generate" class="inline pl-4" />
       </button>
@@ -62,7 +63,7 @@ export default {
   components: { TheSlider, TheStrengthValuator, InputElement },
   data() {
     return {
-      password: "PTx1f5DaFX",
+      password: "",
       copiedClicked: false,
       sliderValue: 10,
       checkedInputs: {
@@ -96,3 +97,19 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+
+.outputInput::placeholder {
+    color: rgba(230, 229, 234, 0.25)
+}
+
+button:hover img {
+    filter: brightness(0) saturate(100%) invert(92%) sepia(8%) saturate(2388%) hue-rotate(61deg) brightness(114%) contrast(101%);
+}
+
+.copyIcon:hover {
+    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7466%) hue-rotate(162deg) brightness(104%) contrast(112%);
+}
+
+</style>

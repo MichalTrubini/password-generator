@@ -9,6 +9,7 @@ export default {
         gray: "#817D92",
         darkGray: "#24232C",
         blackish: "#18171F",
+        redish: "#FF7A7A",
       },
       fontSize: {
         base: "0.94rem",

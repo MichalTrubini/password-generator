@@ -9,12 +9,21 @@
         readonly
         class="text-whitish w-[90%] outputInput bg-inherit text-2xl outline-none md:text-3xl"
       />
-      <img :src="copyIcon" alt="copy password" @click="copyPassword" class="hover:cursor-pointer copyIcon"/>
+      <img
+        :src="copyIcon"
+        alt="copy password"
+        @click="copyPassword"
+        class="hover:cursor-pointer copyIcon"
+      />
       <p
         v-if="copiedClicked"
         class="text-green text-xs absolute bottom-[2px] right-0 md:text-sm md:bottom-1 md:right-3"
+      >Copied!</p>
+      <p
+        v-if="passwordEmpty"
+        class="text-redish text-xs absolute bottom-[2px] right-0 md:text-sm md:bottom-1 md:right-3"
       >
-        Copied!
+        Nothing to copy!
       </p>
     </div>
     <div class="p-4 bg-darkGray mt-4 md:p-8">
@@ -41,8 +50,10 @@
           @emittedInputValue="emittedInputValue"
         />
       </div>
-      <TheStrengthValuator :strength="strength"/>
-      <button class="w-full p-4 bg-green uppercase text-darkGray text-base hover:cursor-pointer hover:bg-inherit hover:outline-green hover:outline-2p hover:outline hover:text-green">
+      <TheStrengthValuator :strength="strength" />
+      <button
+        class="w-full p-4 bg-green uppercase text-darkGray text-base hover:cursor-pointer hover:bg-inherit hover:outline-green hover:outline-2p hover:outline hover:text-green"
+      >
         <p class="inline">generate</p>
         <img :src="arrowIcon" alt="generate" class="inline pl-4" />
       </button>
@@ -57,7 +68,7 @@ import TheSlider from "./TheSlider.vue";
 import TheStrengthValuator from "./TheStrengthValuator.vue";
 import InputElement from "./InputElement.vue";
 import generatePassword from "../functions/generatePassword";
-import zxcvbn from 'zxcvbn';
+import zxcvbn from "zxcvbn";
 
 export default {
   name: "Form",
@@ -66,8 +77,9 @@ export default {
     return {
       password: "",
       copiedClicked: false,
+      passwordEmpty: false,
       sliderValue: 0,
-      strength: '',
+      strength: "",
       checkedInputs: {
         uppercase: false,
         lowercase: false,
@@ -90,6 +102,13 @@ export default {
       this.checkedInputs[id] = value;
     },
     copyPassword() {
+      if (this.password === "") {
+        this.passwordEmpty = true;
+        setTimeout(() => {
+          this.passwordEmpty = false;
+        }, 1500);
+        return;
+      }
       this.copiedClicked = true;
       navigator.clipboard.writeText(this.password);
       setTimeout(() => {
@@ -99,7 +118,14 @@ export default {
     evaluatePasswordStrength(password) {
       const result = zxcvbn(password);
       const score = result.score;
-      this.strength = (score === 0 || score === 1) ? 'too weak' : score === 2 ? 'weak' : score === 3 ? 'medium' : 'strong';
+      this.strength =
+        score === 0 || score === 1
+          ? "too weak"
+          : score === 2
+          ? "weak"
+          : score === 3
+          ? "medium"
+          : "strong";
       console.log(result.score);
     },
   },
@@ -107,17 +133,17 @@ export default {
 </script>
 
 <style scoped>
-
 .outputInput::placeholder {
-    color: rgba(230, 229, 234, 0.25)
+  color: rgba(230, 229, 234, 0.25);
 }
 
 button:hover img {
-    filter: brightness(0) saturate(100%) invert(92%) sepia(8%) saturate(2388%) hue-rotate(61deg) brightness(114%) contrast(101%);
+  filter: brightness(0) saturate(100%) invert(92%) sepia(8%) saturate(2388%)
+    hue-rotate(61deg) brightness(114%) contrast(101%);
 }
 
 .copyIcon:hover {
-    filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7466%) hue-rotate(162deg) brightness(104%) contrast(112%);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7466%)
+    hue-rotate(162deg) brightness(104%) contrast(112%);
 }
-
 </style>

@@ -1,7 +1,7 @@
 <template>
   <form class="max-w-[540px] w-full" @submit.prevent="submitForm">
     <div
-      class="relative w-full bg-darkGray flex justify-between p-4 md:py-5 md:px-8"
+      class="relative w-full bg-darkGray flex justify-between items-center p-4 md:py-5 md:px-8"
     >
       <input
         :value="password"
@@ -13,7 +13,7 @@
         :src="copyIcon"
         alt="copy password"
         @click="copyPassword"
-        class="hover:cursor-pointer copyIcon"
+        class="hover:cursor-pointer copyIcon w-[17.5px] h-[20px] md:w-[21px] md:h-[24px]"
       />
       <p
         v-if="copiedClicked"
@@ -55,7 +55,7 @@
         class="w-full p-4 bg-green uppercase text-darkGray text-base hover:cursor-pointer hover:bg-inherit hover:outline-green hover:outline-2p hover:outline hover:text-green"
       >
         <p class="inline">generate</p>
-        <img :src="arrowIcon" alt="generate" class="inline pl-4" />
+        <img :src="arrowIcon" alt="generate" class="inline pl-4 pb-[2px] w-[28px] h-[14px]" />
       </button>
     </div>
   </form>

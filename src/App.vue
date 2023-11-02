@@ -16,6 +16,15 @@ export default {
 </script>
 
 <style>
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('./assets/JetBrainsMono-Bold.ttf') format('truetype');
+  font-weight: 1000; 
+  font-stretch: 200;
+  font-display: swap;
+}
+
 body {
   font-family: "JetBrains Mono", monospace;
   font-weight: 700;
